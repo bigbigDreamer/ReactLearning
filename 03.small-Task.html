@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel/lib/babel.min.js"></script>
+    <script type="text/babel">
+        window.onload = function () {
+          /*  //1.创建虚拟Dom元素对象
+            let vDom = <ul>
+                <h1>前端JS框架列表</h1>
+                <li>Bootstrap</li>
+                <li>jQuery</li>
+                <li>React</li>
+                <li>Vue</li>
+            </ul>;
+            //2.渲染Dom 解析jsx
+            ReactDOM.render(vDom,document.getElementById('box'));
+            */
+            /**
+             *@Time  2018/8/16 16:07
+             *@Author  沐沐
+             *@Description  虚拟DOM页面不会重绘，虚拟Dom会很轻
+             *       渲染的时候才会更新界面
+             *           如何将一个数组的数据转化为标签的数组
+             *           ----使用map方法
+             *@return
+             **/
+            //另外一种写法
+                //标签多的话就可以使用小括号，
+            let arr = ['jQuery','Bootstrap','React','Vue'];
+            let vDom = (<ul>
+                {
+                    arr.map((item,index)=>{
+                        return <li key={index}>{item}</li>
+                    })
+                }
+            </ul>);
+            //渲染页面
+            ReactDOM.render(vDom,document.getElementById('box'));
+
+        }
+    </script>
+</head>
+<body>
+<div class="box" id="box">
+
+</div>
+</body>
+</html>

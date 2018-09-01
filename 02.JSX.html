@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>相识JSX</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel/lib/babel.min.js"></script>
+    <script type="text/babel">
+        window.onload = function () {
+            //1.创建虚拟Dom元素对象
+            let vDom = <h3 id="myid">I love you</h3>;
+            //2.渲染Dom 解析jsx
+            ReactDOM.render(vDom,document.getElementById('test1'));
+            /**
+             *@Time  2018/8/16 16:07
+             *@Author  沐沐
+             *@Description  虚拟DOM页面不会重绘，虚拟Dom会很轻
+             *       渲染的时候才会更新界面
+             *@return
+             **/
+
+        }
+    </script>
+</head>
+<body>
+<div id="test1"></div>
+</body>
+</html>

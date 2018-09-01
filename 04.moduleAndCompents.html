@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模块与组件</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel/lib/babel.min.js"></script>
+    <script type="text/babel">
+        /**
+         *@Time  2018/8/16 19:23
+         *@Author  沐沐
+         *@Description  只要组件有状态，就用类的方式，
+         *       组件的三个要素：
+         *            state:状态
+         *            props：属性
+         *            refs:事件处理
+         *@return
+         **/
+        window.onload = ()=>{
+            //1.定义组件 {2种方式}
+            class LIKE extends React.Component{
+                constructor(props){
+                    super(props);
+                    console.log(props);
+                    //初始化状态
+                    this.state = {
+                      isLIKE:false
+                    }
+                    this.handleClick = this.handleClick.bind(this);
+                    this.againClick = this.againClick.bind(this);
+                }
+                //重写组件类的方法
+                render (){//固定的
+                    //console.log(this)
+                    //读取状态
+                    const {isLIKE} = this.state;
+                    const {name,age} = this.props;
+                    return (<div>
+                        <h2 onClick={
+                        this.handleClick
+                    }>{isLIKE?'你喜欢我吗':'我喜欢你'}</h2>
+                    <ul>
+                        <li>{name}</li>
+                        <li>{age}</li>
+                    </ul>
+                        <input type="text" ref={input => this.input = input}/>
+                        <button onClick={this.againClick}>点击</button>
+                    </div>);
+                }
+                //上面那个input的名字随意指定
+                againClick(){
+                   // const {content} = this.refs;
+                    alert(this.input.value)
+
+                }
+                //新添加方法，内部this默认不是组件对象，而是undefined
+                handleClick (){
+                    //得到原有的状态,并取反
+                  const isLIKE = !this.state.isLIKE;
+                  //更新状态
+                    this.setState({
+                        isLIKE
+                    })
+                }
+            }
+            //渲染组件标签
+            const obj = {
+                name:'张三',
+            age:18
+            }
+            //这儿推荐使用es6的语法糖
+            ReactDOM.render(<LIKE {...obj}/>,document.getElementById('example'));
+        }
+    </script>
+</head>
+<body>
+<div id="example">
+
+</div>
+</body>
+</html>

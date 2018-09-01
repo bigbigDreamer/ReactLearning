@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>总结</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel/lib/babel.min.js"></script>
+    <script type="text/babel">
+        /**
+         *@Time  2018/8/17 9:05
+         *@Author  沐沐
+         *@Description   总结，组件编码化流程，
+         *               1.拆分组件
+         *               2.实现静态组件
+         *               3.实现动态组件
+         *               1)实现初始化数据动态显示
+         *               2）
+         *@return
+         **/
+        //创建组件
+            window.onload = ()=>{
+                class App extends React.Component{
+                    constructor(props){
+                        super(props);
+                    }
+                    render(){
+                        return (
+                            <div>
+                                <Head/>
+                                <Body/>
+                            </div>
+                        )
+                    }
+                }
+                class Head extends React.Component{
+                    constructor(props){
+                        super(props)
+                        this.state = {
+                            isAppear : false
+                        }
+                        this.handelClick = this.handelClick.bind(this)
+                    }
+                    handelClick(){
+                        const isAppear = !this.state.isAppear;
+                        this.setState({
+                            isAppear
+                        })
+                    }
+                    render(){
+                        let {isAppear} = this.state;
+                        return (
+                            <h1 onClick={this.handelClick}>
+                                {isAppear?'我想复习react组件化编码':'还是算了吧'}
+                            </h1>
+                        )
+                    }
+                }
+                class Body extends React.Component{
+                    render(){
+                        return (
+                            <ul>
+                                <li>1111</li>
+                            </ul>
+                        )
+                    }
+                }
+                //渲染组件标签
+                ReactDOM.render(<App/>,document.getElementById('app'))
+            }
+    </script>
+</head>
+<body>
+<div class="app" id="app">
+
+</div>
+</body>
+</html>

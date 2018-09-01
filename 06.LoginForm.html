@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单收集数据</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel/lib/babel.min.js"></script>
+    <script type="text/babel">
+        /**
+         *@Time  2018/8/17 9:37
+         *@Author  沐沐
+         *@Description  表单收集数据
+         *      不希望表单自动提交
+         *      1.受控组件，与非受控组件。
+         *      2.阻止事件的默认行为：event.preventDefault()
+         *@return
+         **/
+        class LoginForm extends React.Component{
+            constructor(props){
+                super(props)
+                this.state = {
+                    pwd:''
+                }
+                this.handSubmit = this.handSubmit.bind(this)
+                this.handChange = this.handChange.bind(this)
+            }
+            handSubmit(event){
+                const name = this.nameinput.value;
+                const {pwd} = this.state;
+                alert(`准备提交的用户名${name},密码是${pwd}`)
+                //阻止事件的默认行为(提交)
+                event.preventDefault()
+            }
+            handChange(event){
+                const pwd = event.target.value;
+                this.setState({
+                    pwd
+                })
+            }
+            render(){
+                return(
+                    <form action="/test" onSubmit={this.handSubmit}>
+                       用户名 <input type="text" ref={input =>this.nameinput = input}/>
+                        密码  <input type="password" value={this.state.pwd} onChange={this.handChange}/>
+                        <input type="submit" value="登陆"/>
+                    </form>
+                );
+            }
+        }
+        ReactDOM.render(<LoginForm/>,document.getElementById('app'));
+    </script>
+</head>
+<body>
+<div id="app">
+
+</div>
+</body>
+</html>
